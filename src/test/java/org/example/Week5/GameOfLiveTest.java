@@ -21,7 +21,21 @@ public class GameOfLiveTest {
                 {false, false, false}
         };
         boolean[][] current = GameOfLife.changingField(input);
+        System.out.println(currentForBlinker(current));
         assertTrue(Arrays.deepEquals(expected, current));
+    }
+
+    public static String currentForBlinker(boolean[][] current) {
+        String output = "";
+
+        for (int rowIndex = 0; rowIndex < current.length; rowIndex++) {
+            for (int index = 0; index < current[rowIndex].length; index++) {
+                output += " "+current[rowIndex][index];
+            }
+
+            output += "\n";
+        }
+        return output;
     }
 
     @Test

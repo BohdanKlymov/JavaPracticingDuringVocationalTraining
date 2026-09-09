@@ -1,4 +1,4 @@
-package org.example.Week2;
+package org.example.August_2026.Week2;
 
 public class Methods {
     public static void main(String[] args) {

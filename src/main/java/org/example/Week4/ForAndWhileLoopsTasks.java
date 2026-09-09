@@ -28,6 +28,7 @@ public class ForAndWhileLoopsTasks {
         return result;
     }
 
+    // f(n) = 1*2*3*...*n-1*n
     public static int calculationOfFakultaet(int input) {
         int result = 1;
 
@@ -36,4 +37,15 @@ public class ForAndWhileLoopsTasks {
         }
         return result;
     }
+
+    // f(n) = 1 if n = 1, sonst f(n-1)*n
+    public static int calculationOfFakultaetRec(int n) {
+        if(n==1){
+            return 1;
+        }
+        else{
+            return n* calculationOfFakultaetRec(n-1);
+        }
+    }
+    
 }

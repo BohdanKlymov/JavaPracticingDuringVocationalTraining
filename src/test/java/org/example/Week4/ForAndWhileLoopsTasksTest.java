@@ -21,9 +21,25 @@ public class ForAndWhileLoopsTasksTest {
 
     @Test
     void calculationOfFakultaet2() {
-        int input = 0;
+        int input = 1;
         int expected = 1;
         int current = ForAndWhileLoopsTasks.calculationOfFakultaet(input);
+        assertEquals(expected, current);
+    }
+
+    @Test
+    void calculationOfFakultaetRec() {
+        int input = 5;
+        int expected = 120;
+        int current = ForAndWhileLoopsTasks.calculationOfFakultaetRec(input);
+        assertEquals(expected, current);
+    }
+
+    @Test
+    void calculationOfFakultaetRec2() {
+        int input = 1;
+        int expected = 1;
+        int current = ForAndWhileLoopsTasks.calculationOfFakultaetRec(input);
         assertEquals(expected, current);
     }
 }

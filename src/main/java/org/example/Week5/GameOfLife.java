@@ -21,11 +21,7 @@ public class GameOfLife {
     public static boolean[][] changingField(boolean[][] twoDimensionalSquare) {
 
 //        Copy 2D array
-        boolean[][] nextGeneration = new boolean[twoDimensionalSquare.length][];
-
-        for (int i = 0; i < twoDimensionalSquare.length; i++) {
-            nextGeneration[i] = twoDimensionalSquare[i].clone();
-        }
+        boolean[][] nextGeneration = new boolean[twoDimensionalSquare.length][twoDimensionalSquare[0].length];
 //
 
         for (int rowIndex = 0; rowIndex < twoDimensionalSquare.length; rowIndex++) {
@@ -106,31 +102,31 @@ public class GameOfLife {
 
         boolean isBorder = isTopRow || isBottomRow || isLeftColumn || isRightColumn;
 
+
+
         if (isBorder) {
             if (isTopRow) {
-                for (int countOfRowChecks = rowIndex; countOfRowChecks <= countOfRowChecks + 1; countOfRowChecks++) {
-                    for (int countOfColumnChecks = index - 1; countOfColumnChecks <= countOfColumnChecks + 2; countOfColumnChecks++) {
-                        if (countOfRowChecks == rowIndex && countOfColumnChecks == index) {
-                            continue;
-                        }
+                for (int countOfRowChecks = rowIndex; countOfRowChecks <= rowIndex + 1; countOfRowChecks++) {
+                    for (int countOfColumnChecks = index - 1; countOfColumnChecks <= index + 1; countOfColumnChecks++) {
 
-                        if (countOfRowChecks < 0 ||
-                                countOfRowChecks >= twoDimensionalSquare.length ||
-                                countOfColumnChecks < 0 ||
-                                countOfColumnChecks >= twoDimensionalSquare[countOfRowChecks].length) {
-                            continue;
-                        }
+                        if (!(countOfRowChecks == rowIndex && countOfColumnChecks == index)) {
 
-
-                        if (twoDimensionalSquare[countOfRowChecks][countOfColumnChecks]) {
-                            amountOfTrueNeighbors++;
+                            if (!(countOfRowChecks < 0 ||
+                                    countOfRowChecks >= twoDimensionalSquare.length ||
+                                    countOfColumnChecks < 0 ||
+                                    countOfColumnChecks >= twoDimensionalSquare[countOfRowChecks].length))
+                            {
+                                if (twoDimensionalSquare[countOfRowChecks][countOfColumnChecks]) {
+                                    amountOfTrueNeighbors++;
+                                }
+                            }
                         }
                     }
                 }
             }
             if (isBottomRow) {
-                for (int countOfRowChecks = rowIndex - 1; countOfRowChecks <= countOfRowChecks + 1; countOfRowChecks++) {
-                    for (int countOfColumnChecks = index - 1; countOfColumnChecks <= countOfColumnChecks + 2; countOfColumnChecks++) {
+                for (int countOfRowChecks = rowIndex - 1; countOfRowChecks <= rowIndex; countOfRowChecks++) {
+                    for (int countOfColumnChecks = index - 1; countOfColumnChecks <= index + 1; countOfColumnChecks++) {
                         if (countOfRowChecks == rowIndex && countOfColumnChecks == index) {
                             continue;
                         }
@@ -149,8 +145,8 @@ public class GameOfLife {
                 }
             }
             if (isLeftColumn) {
-                for (int countOfRowChecks = rowIndex - 1; countOfRowChecks <= countOfRowChecks + 2; countOfRowChecks++) {
-                    for (int countOfColumnChecks = index; countOfColumnChecks <= countOfColumnChecks + 1; countOfColumnChecks++) {
+                for (int countOfRowChecks = rowIndex - 1; countOfRowChecks <= rowIndex + 1; countOfRowChecks++) {
+                    for (int countOfColumnChecks = index; countOfColumnChecks <= index + 1; countOfColumnChecks++) {
                         if (countOfRowChecks == rowIndex && countOfColumnChecks == index) {
                             continue;
                         }
@@ -169,8 +165,8 @@ public class GameOfLife {
                 }
             }
             if (isRightColumn) {
-                for (int countOfRowChecks = rowIndex - 1; countOfRowChecks <= countOfRowChecks + 2; countOfRowChecks++) {
-                    for (int countOfColumnChecks = index - 1; countOfColumnChecks <= countOfColumnChecks + 1; countOfColumnChecks++) {
+                for (int countOfRowChecks = rowIndex - 1; countOfRowChecks <= rowIndex + 1; countOfRowChecks++) {
+                    for (int countOfColumnChecks = index - 1; countOfColumnChecks <= index; countOfColumnChecks++) {
                         if (countOfRowChecks == rowIndex && countOfColumnChecks == index) {
                             continue;
                         }
@@ -188,6 +184,8 @@ public class GameOfLife {
                     }
                 }
             }
+
+            return rulesForLifeOrDeath(amountOfTrueNeighbors, isCellTrue);
         }
 
 
@@ -218,9 +216,7 @@ public class GameOfLife {
 
     public static boolean rulesForLifeOrDeath (int amountOfTrueNeighbors, boolean isCellTrue) {
         if (!isCellTrue) {
-            if (amountOfTrueNeighbors == 3) {
-                return true;
-            }
+            return amountOfTrueNeighbors == 3;
         }
         return 2 <= amountOfTrueNeighbors && amountOfTrueNeighbors <= 3;
     }
