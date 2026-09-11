@@ -55,12 +55,12 @@ public class PointAndAxisReflectionOfMatrices {
 //*/
 
 
-//    Ergänzen Sie das gegebene Programm so, dass es die Matrix an der Achse
-//    von links oben nach rechts unten spiegelt.
+//    6.2: Ergänzen Sie das gegebene Programm so, dass es die Matrix
+//    an der Achse von links oben nach rechts unten spiegelt.
     public static int[][] exchangingAnArrayFromTopLeftToBottomRight(int[][] twoDimensionalArray) {
 
-        for (int row = 0; row < 4; row++) {
-            for (int index = row + 1; index < 4; index++) {
+        for (int row = 0; row < twoDimensionalArray.length - 1; row++) {
+            for (int index = row + 1; index < twoDimensionalArray[row].length; index++) {
                 int savedNumberForDuplication;
 
                 savedNumberForDuplication = twoDimensionalArray[row][index];
@@ -74,7 +74,50 @@ public class PointAndAxisReflectionOfMatrices {
         return twoDimensionalArray;
     }
 
-//    Ergänzen Sie das gegebene Programm so, dass es die Matrix an der Achse
+//    6.3: Ergänzen Sie das gegebene Programm so, dass es die Matrix an der Achse
 //    von rechts oben nach links unten spiegelt. Die gewünschte Ausgabe ist:
+    public static int[][] exchangingAnArrayFromTopRightToBottomLeft(int[][] twoDimensionalArray) {
+        for (int row = 0; row < twoDimensionalArray.length - 1; row++)  {
+            for (int index = 0; index < twoDimensionalArray[row].length - 1 - row; index++){
+                int savedNumberForDuplication;
+
+                savedNumberForDuplication = twoDimensionalArray[twoDimensionalArray.length - 1 - row][twoDimensionalArray[row].length - 1 - index];
+
+                twoDimensionalArray[twoDimensionalArray.length - 1 - row][twoDimensionalArray[row].length - 1 - index] = twoDimensionalArray[index][row];
+                twoDimensionalArray[index][row] = savedNumberForDuplication;
+            }
+        }
+        return twoDimensionalArray;
+    }
+
+
+//    6.1: (schwieriger) Ergänzen Sie das gegebene Programm so, dass es die Matrix an ihrem
+//    Mittelpunkt spiegelt (Punktspiegelung). Die gewünschte Ausgabe ist:
+    public static int[][] exchangingAnArrayAcrossItsCenter(int[][] twoDimensionalArray) {
+
+        if (twoDimensionalArray.length % 2 != 0) {
+            for (int index = 0; index < twoDimensionalArray.length / 2; index++) {
+                int savedNumberForDuplication;
+
+                savedNumberForDuplication = twoDimensionalArray[twoDimensionalArray.length / 2][index];
+                twoDimensionalArray[twoDimensionalArray.length / 2][index] = twoDimensionalArray[twoDimensionalArray.length / 2][twoDimensionalArray.length - 1 - index];
+                twoDimensionalArray[twoDimensionalArray.length / 2][twoDimensionalArray.length - 1 - index] = savedNumberForDuplication;
+            }
+        }
+
+        for (int row = 0; row < twoDimensionalArray.length / 2; row++) {
+            for (int index = 0; index < twoDimensionalArray[row].length; index++) {
+                int savedNumberForDuplication;
+
+                savedNumberForDuplication = twoDimensionalArray[row][index];
+
+                twoDimensionalArray[row][index] = twoDimensionalArray[twoDimensionalArray.length - 1 - row][twoDimensionalArray[row].length - 1 - index];
+
+                twoDimensionalArray[twoDimensionalArray.length - 1 - row][twoDimensionalArray[row].length - 1 - index] = savedNumberForDuplication;
+            }
+        }
+
+        return twoDimensionalArray;
+    }
 
 }
